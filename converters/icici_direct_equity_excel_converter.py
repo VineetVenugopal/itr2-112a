@@ -78,7 +78,7 @@ class IciciDirectEquityLTCGExcelConverter:
 
 
 def execute():
-    file_name = r'files/NVG_ICICI_DIRECT_EQ_CAPITALGAIN_24-25_ORIGLNAL.xlsx'    
+    file_name = r'files/ICICI_DIRECT_EQ_CAPITALGAIN_24-25_ORIGLNAL.xlsx'    
     df = pd.read_excel(file_name, sheet_name='Formatted_LTCG')
 
     # for i, col in enumerate(df.columns):

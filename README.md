@@ -1,7 +1,6 @@
 # itr2-112a
 
 ## Introduction
-Hi there, 
 
 For those trying to file income tax returns (ITR-2) themselves, reporting long term capital gains (LTCG) in Schedule 112A is painstaking (atleast as of AY 2025-26). 
 
@@ -27,16 +26,40 @@ The `converters` directory contains the logic to convert the input files from va
 The `main.py` file is the entry point. It calls one of the converters to read the input files, build the records and write the output to a CSV file.
 
 ## Usage
-First install dependencies using pip:
+
+```python
+from datetime import date
+from record.record_builder import RecordBuilder, Record
+from record import write_to_csv_file
+
+builder = RecordBuilder()
+
+record: Record = builder.purchase_date(date(2018, 5, 1))
+            .transfer_date(date(2019, 3, 1))
+            .isin_code("INF740K01029")
+            .name("DSP Flexi Cap Fund - Regular Plan - IDCW")
+            .no_of_shares(26.506)
+            .purchase_nav(62.623)
+            .sale_price_per_share(62.623)
+            .nav_as_of_31Jan2018(62.623)
+            .expenditure_wholly_exclusively(0)
+            .build()
+
+write_to_csv_file(records=[record], filename='result.csv')
+```
+
+### Converters
+The `converters` module might use `pandas` to read from excel files. For that, install dependency with the below command:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-To run the utility, you can use the following command:
+Example on how the converters have been wired up:
+```python
+from converters import ModuleExecutors
 
-```bash
-python main.py
+ModuleExecutors.execute(ModuleExecutors.ICICI_DIRECT_EQUITY_LTCG_EXCEL)
 ```
 
 ## Sources

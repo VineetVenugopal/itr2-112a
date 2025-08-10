@@ -5,6 +5,34 @@ from datetime import date
 
 
 class RecordBuilder:
+    """
+    A builder class to construct a Record for Schedule 112A.
+    This class provides methods to set various fields of the record.
+    It encapsulates the logic to calculate derived fields based on the inputs.
+
+    Usage:
+
+    ```python
+    from datetime import date
+    from record.record_builder import RecordBuilder
+    from record import write_to_csv_file
+
+    builder = RecordBuilder()
+    
+    record = (builder.purchase_date(date(2018, 5, 1))
+              .transfer_date(date(2019, 3, 1))
+              .isin_code("INF740K01029")
+              .name("DSP Flexi Cap Fund - Regular Plan - IDCW")
+              .no_of_shares(26.506)
+              .purchase_nav(62.623)
+              .sale_price_per_share(62.623)
+              .nav_as_of_31Jan2018(62.623)
+              .expenditure_wholly_exclusively(0)
+              .build())
+
+    write_to_csv_file(records=[record])
+    ```
+    """
 
     def __init__(self):
         self.record = Record()

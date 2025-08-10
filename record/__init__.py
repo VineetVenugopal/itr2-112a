@@ -1,6 +1,4 @@
-from record.record import Record
-
-
+from .record import Record
 import csv
 
 
@@ -13,9 +11,6 @@ def write_to_csv_file(filename = 'result.csv', records = None):
         # Doing this because there is a comma in one of the headers. The csv writer will not handle it correctly.
 
         spamwriter = csv.writer(csvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_NONE, escapechar='\\')
-
-
-        # spamwriter.writerow([f'"{c}"' for c in Record.columns])
 
         if records is not None:
             for record in records:
